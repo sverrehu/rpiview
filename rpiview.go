@@ -25,10 +25,11 @@ type indexHandler struct{}
 type imageHandler struct{}
 
 var imgWindow *imagewindow.ImageWindow
+var webRoot string
 
 func (h *indexHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/plain; charset=utf-8")
-	_, err := w.Write([]byte("POST a binary image to /img\n"))
+	_, err := w.Write([]byte(fmt.Sprintf("POST a binary image to %s/img\n", webRoot)))
 	if err != nil {
 		log.Printf("Failed to write response: %v", err)
 	}
@@ -72,7 +73,8 @@ func startWebserver(port int) {
 	mux := http.NewServeMux()
 	mux.Handle("/", &indexHandler{})
 	mux.Handle("POST /img", &imageHandler{})
-	log.Printf("Starting server, Ctrl-C to abort. POST images to http://%s:%d/img", localIP(), port)
+	webRoot = fmt.Sprintf("http://%s:%d", localIP(), port)
+	log.Printf("Starting server, Ctrl-C to abort. POST images to %s/img", webRoot)
 	err := http.ListenAndServe(":"+strconv.Itoa(port), mux)
 	if err != nil {
 		log.Fatal(err)

@@ -40,7 +40,7 @@ func (w *ImageWindow) Open() {
 	w.mutex.Lock()
 	w.app = gogpu.NewApp(gogpu.DefaultConfig().
 		WithTitle("Image Viewer").
-		WithSize(800, 600))
+		WithSize(1152, 648)) // 16:9
 	w.mutex.Unlock()
 	var canvas *ggcanvas.Canvas
 	w.app.OnDraw(func(dc *gogpu.Context) {
