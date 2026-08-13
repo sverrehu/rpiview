@@ -1,0 +1,30 @@
+---
+name: Release package
+on:
+  release:
+    types: [created]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Set up Go
+        uses: actions/setup-go@v7
+        with:
+          go-version: '1.26.5'
+
+      - name: Build
+        run: |
+          VERSION="$(grep -Po '\d+\.\d+\.\d+' .release-please-manifest.json)"
+          PACKAGE="$(echo "${{ github.repository }}" | sed -e 's/.*\///')"
+          mkdir builds
+          env CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -a -trimpath -ldflags="-s -w" -o builds/"${PACKAGE}-${VERSION}"-linux-amd64
+
+      - name: Push GitHub release artifact
+        uses: softprops/action-gh-release@3d0d9888cb7fd7b750713d6e236d1fcb99157228 # v3.0.2
+        with:
+          files: builds/*
