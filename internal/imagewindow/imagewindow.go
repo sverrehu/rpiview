@@ -78,7 +78,7 @@ func (w *ImageWindow) Open() {
 		if err != nil {
 			log.Printf("Render error: %v", err)
 		}
-		w.app.RequestRedraw()
+		//w.app.RequestRedraw()
 	})
 	err := w.app.Run()
 	if err != nil {
