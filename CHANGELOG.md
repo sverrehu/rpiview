@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.3](https://github.com/sverrehu/rpiview/compare/v0.0.2...v0.0.3) (2026-11-11)
+
+
+### Bug Fixes
+
+* **deps:** update module github.com/sverrehu/goutils to v1.0.6 ([#11](https://github.com/sverrehu/rpiview/issues/11)) ([bf58503](https://github.com/sverrehu/rpiview/commit/bf58503f5dc6a2acbdbd33da640dd80b6c80e996))
+
 ## [0.0.2](https://github.com/sverrehu/rpiview/compare/v0.0.1...v0.0.2) (2026-11-08)
 
 
