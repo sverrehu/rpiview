@@ -3,7 +3,7 @@ module github.com/sverrehu/rpiview
 go 1.26.1
 
 require (
-	github.com/gogpu/gg v0.52.6
+	github.com/gogpu/gg v0.52.7
 	github.com/gogpu/gogpu v0.55.1
 	github.com/sverrehu/goutils v1.0.7
 )
